@@ -22,6 +22,7 @@ const urlInfo = new URL(url);
 const domain = urlInfo.hostname;
 const device = process.argv.includes("--mobile") ? "mobile" : "desktop";
 const blockGtm = process.argv.includes("--block-gtm");
+const measureSynchronously = process.argv.includes("--sync");
 const date = new Date().toISOString().replace(/:/g, ".");
 const pathDir = urlInfo.pathname.substring(1).replace(/\//g, "-");
 const fullOutputPath = path.join(
@@ -143,9 +144,15 @@ const runLighthouse = async (index) => {
   measures.srt.push(audits["server-response-time"]);
 };
 
-for (let i = 0; i < runs; i++) {
-  // Run lighthouse x times
-  await runLighthouse(i + 1);
+// Run lighthouse x times
+if (measureSynchronously) {
+  for (let i = 0; i < runs; i++) {
+    await runLighthouse(i + 1);
+  }
+} else {
+  await Promise.all(
+    Array.from({ length: runs }, async (_, i) => await runLighthouse(i + 1))
+  );
 }
 
 // Console log and write to file
