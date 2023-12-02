@@ -18,7 +18,7 @@ Reports will be saved to folder in a structure like `domain > path > date > date
 
 ## Installation
 
-No need, it will use NPX and the Lighthouse CLI package. You need NodeJS though.'
+No need, it will use NPX and the Lighthouse CLI package. You need NodeJS though.
 
 ## Usage
 
