@@ -31,10 +31,11 @@ const fullOutputPath = path.join(
   pathDir,
   `${date}-${device}`
 );
-const runs =
-  process.argv
-    .filter((arg) => arg.startsWith("--runs="))
-    ?.map((arg) => arg.replace("--runs=", ""))?.[0] || defaultRuns;
+const runsArg = process.argv
+  .filter((arg) => arg.startsWith("--runs="))
+  ?.map((arg) => arg.replace("--runs=", ""))?.[0];
+
+const runs = !isNaN(parseInt(runsArg)) ? parseInt(runsArg) : defaultRuns;
 
 // Make it a promise so we can await it
 const exec = promisify(lameExec);
