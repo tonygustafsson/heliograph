@@ -12,7 +12,7 @@ import fs from "fs";
 import path from "path";
 
 // Configuration
-const runs = 5;
+const defaultRuns = 5;
 const outputPath = "/home/tony/lighthouse/reports";
 
 // Collect needed variables
@@ -31,6 +31,10 @@ const fullOutputPath = path.join(
   pathDir,
   `${date}-${device}`
 );
+const runs =
+  process.argv
+    .filter((arg) => arg.startsWith("--runs="))
+    ?.map((arg) => arg.replace("--runs=", ""))?.[0] || defaultRuns;
 
 // Make it a promise so we can await it
 const exec = promisify(lameExec);
