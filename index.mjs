@@ -165,7 +165,7 @@ Object.keys(measures).forEach((measure) => {
   const avgValue = getAverage(
     measures[measure].map((val) => val.numericValue || val)
   );
-  const avgScore = getAverage(measures[measure].map((val) => val.score));
+  const avgScore = getAverage(measures[measure].map((val) => val.score || val));
 
   const msg = `${measureHeadings[measure]}: ${getDisplayValue(
     avgValue,
