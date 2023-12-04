@@ -28,7 +28,7 @@ node ./index.mjs https://www.yoursite.com
 
 ## Options
 
-- `--sync` runs one test at a time, takes more time, at the same time it can be more accurate
+- `--async` runs all tests simultaneously, can change the results if you have many runs defined
 - `--runs` number of runs, default is 5
 - `--mobile` for mobile emulation
 - `--block-gtm` to block Google Tag Manager
